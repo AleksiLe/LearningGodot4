@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0juugbuq6cna"]
+
+[ext_resource type="Script" uid="uid://d3vmnvycymglj" path="res://scenes/levels/level.gd" id="1_b2cq8"]
+[ext_resource type="PackedScene" uid="uid://2b2u8au2lem0" path="res://scenes/enemies/scout.tscn" id="2_xb4v1"]
+[ext_resource type="PackedScene" uid="uid://b215mm1kw0oqi" path="res://scenes/UserInterface/canvas_layer.tscn" id="3_b2cq8"]
+[ext_resource type="PackedScene" uid="uid://cf1vadfnm7yt2" path="res://scenes/player/player.tscn" id="4_xb4v1"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_b2cq8")
+
+[node name="Ground" type="Node2D" parent="."]
+scale = Vector2(0.995485, 1)
+
+[node name="Items" type="Node2D" parent="."]
+position = Vector2(560, 371)
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Scout" parent="Enemies" instance=ExtResource("2_xb4v1")]
+
+[node name="Player" parent="." instance=ExtResource("4_xb4v1")]
+position = Vector2(560, 371)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.4, 0.4)
+position_smoothing_enabled = true
+
+[node name="Lights" type="Node2D" parent="."]
+scale = Vector2(0.995485, 1)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("3_b2cq8")]
+
+[connection signal="grenade_throw" from="Player" to="." method="_on_player_grenade_throw"]
+[connection signal="laser_shot" from="Player" to="." method="_on_player_laser_shot"]
